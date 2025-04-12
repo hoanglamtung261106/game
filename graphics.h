@@ -1,6 +1,5 @@
 #ifndef _GRAPHICS__H
 #define _GRAPHICS__H
-
 #include <SDL.h>
 #include <SDL_image.h>
 #include "definition.h"
@@ -54,41 +53,34 @@ struct Graphics {
         SDL_RenderPresent(renderer);
     }
 
-    SDL_Texture* loadTexture(const char* filename)
-    {
+    SDL_Texture* loadTexture(const char* filename) {
         SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
 
         SDL_Texture* texture = IMG_LoadTexture(renderer, filename);
         if (texture == NULL)
             SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_ERROR, "Load texture %s", IMG_GetError());
-
         return texture;
     }
 
     void renderTexture(SDL_Texture* texture, int x, int y) {
         SDL_Rect dest;
-
         dest.x = x;
         dest.y = y;
         SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
-
         SDL_RenderCopy(renderer, texture, NULL, &dest);
     }
 
     void blitRect(SDL_Texture* texture, SDL_Rect* src, int x, int y) {
         SDL_Rect dest;
-
         dest.x = x;
         dest.y = y;
         dest.w = src->w;
         dest.h = src->h;
-
         SDL_RenderCopy(renderer, texture, src, &dest);
     }
 
     void quit() {
         IMG_Quit();
-
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
