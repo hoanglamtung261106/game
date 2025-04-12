@@ -14,6 +14,8 @@ void initialize() {
     SDL_Texture* bird2Texture = graphics.loadTexture(BIRD2_SPRITE_FILE);
     bird2.init(bird2Texture, BIRD2_FRAMES, BIRD2_CLIPS);
 
+    SDL_Texture* round_button = graphics.loadTexture(ROUND_BUTTON);
+
     pause_button[0].x = SCREEN_WIDTH - 30;
     pause_button[0].y = 0;
     pause_button[0].w = 30;
